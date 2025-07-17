@@ -1,0 +1,119 @@
+/* style.css - Tema escuro para sistema Bela Pedra */
+
+:root {
+  --cor-fundo: #121214;
+  --cor-fundo-secundario: #1e1e23;
+  --cor-texto: #e1e1e6;
+  --cor-primaria: #4caf50; /* verde */
+  --cor-secundaria: #f39c12; /* laranja */
+  --cor-erro: #e74c3c; /* vermelho */
+  --cor-borda: #2e2e38;
+  --cor-hover: #33333d;
+  --cor-botao-texto: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background-color: var(--cor-fundo-secundario);
+  padding: 2.5rem 3rem;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--cor-primaria);
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+form select,
+form input[type="password"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+form select:disabled {
+  background-color: #2c2c34;
+  cursor: not-allowed;
+}
+
+form select:focus,
+form input[type="password"]:focus {
+  outline: none;
+  border-color: var(--cor-secundaria);
+  box-shadow: 0 0 5px var(--cor-secundaria);
+}
+
+button {
+  width: 100%;
+  background: linear-gradient(45deg, var(--cor-primaria), var(--cor-secundaria));
+  border: none;
+  padding: 0.8rem 0;
+  border-radius: 7px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--cor-botao-texto);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(45deg, var(--cor-secundaria), var(--cor-primaria));
+}
+
+.error-msg {
+  background-color: var(--cor-erro);
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+}
+
+@media (max-width: 400px) {
+  .login-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
+.sucesso-msg {
+  background-color: #27ae60;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+}
