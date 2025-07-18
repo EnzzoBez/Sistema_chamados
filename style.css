@@ -1,119 +1,881 @@
-/* style.css - Tema escuro para sistema Bela Pedra */
+/* style.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+
+/* Variáveis CSS para cores */
 :root {
-  --cor-fundo: #121214;
-  --cor-fundo-secundario: #1e1e23;
-  --cor-texto: #e1e1e6;
-  --cor-primaria: #4caf50; /* verde */
-  --cor-secundaria: #f39c12; /* laranja */
-  --cor-erro: #e74c3c; /* vermelho */
-  --cor-borda: #2e2e38;
-  --cor-hover: #33333d;
-  --cor-botao-texto: #ffffff;
+    --primary-color: #007bff; /* Azul vibrante */
+    --primary-dark: #0056b3;
+    --secondary-color: #6c757d; /* Cinza suave */
+    --accent-green: #28a745; /* Verde para sucesso/resolvido */
+    --accent-red: #dc3545; /* Vermelho para erro/perigo/alta prioridade */
+    --accent-orange: #ffc107; /* Laranja para alerta/em atendimento/média prioridade */
+    --accent-blue-light: #17a2b8; /* Azul claro para info/pendente */
+    --text-color: #333;
+    --text-light: #666;
+    --bg-light: #f8f9fa; /* Fundo claro */
+    --bg-dark: #e9ecef; /* Fundo secundário */
+    --card-bg: #ffffff; /* Fundo dos cards */
+    --border-color: #dee2e6;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+
+    --border-radius-sm: 5px;
+    --border-radius-md: 8px;
 }
 
+/* Base */
 * {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  margin: 0;
-  background-color: var(--cor-fundo);
-  color: var(--cor-texto);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-.login-container {
-  background-color: var(--cor-fundo-secundario);
-  padding: 2.5rem 3rem;
-  border-radius: 10px;
-  width: 320px;
-  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-weight: 700;
-  font-size: 1.8rem;
-  color: var(--cor-primaria);
+a:hover {
+    color: var(--primary-dark);
 }
 
-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  font-size: 0.9rem;
+ul {
+    list-style: none;
 }
 
-form select,
-form input[type="password"] {
-  width: 100%;
-  padding: 0.6rem 0.8rem;
-  margin-bottom: 1.5rem;
-  border-radius: 5px;
-  border: 1px solid var(--cor-borda);
-  background-color: var(--cor-fundo);
-  color: var(--cor-texto);
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9em;
 }
 
-form select:disabled {
-  background-color: #2c2c34;
-  cursor: not-allowed;
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
 }
 
-form select:focus,
-form input[type="password"]:focus {
-  outline: none;
-  border-color: var(--cor-secundaria);
-  box-shadow: 0 0 5px var(--cor-secundaria);
+th {
+    background-color: var(--bg-dark);
+    font-weight: bold;
+    color: var(--text-color);
+    text-transform: uppercase;
 }
 
-button {
-  width: 100%;
-  background: linear-gradient(45deg, var(--cor-primaria), var(--cor-secundaria));
-  border: none;
-  padding: 0.8rem 0;
-  border-radius: 7px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--cor-botao-texto);
-  cursor: pointer;
-  transition: background 0.3s ease;
+tr:hover {
+    background-color: #f1f1f1;
 }
 
-button:hover {
-  background: linear-gradient(45deg, var(--cor-secundaria), var(--cor-primaria));
+/* Dashboard Container (TI) */
+.dashboard-container {
+    width: 100%;
+    max-width: 1400px; /* Aumentado para acomodar mais conteúdo */
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 20px var(--shadow-light);
+    overflow: hidden; /* Garante que os cantos arredondados funcionem */
+    display: flex;
+    flex-direction: column;
 }
 
-.error-msg {
-  background-color: var(--cor-erro);
-  padding: 0.8rem 1rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  text-align: center;
-  color: #fff;
+/* Header (Geral - usado tanto para TI quanto para Usuário) */
+.header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+    gap: 15px; /* Espaço entre os itens do header */
 }
 
-@media (max-width: 400px) {
-  .login-container {
-    width: 90%;
-    padding: 1.5rem;
-  }
+.header h1 {
+    font-size: 1.8em;
+    margin: 0;
+    display: flex;
+    align-items: center;
 }
-.sucesso-msg {
-  background-color: #27ae60;
-  padding: 0.8rem 1rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  text-align: center;
-  color: #fff;
+
+.header h1 .fas {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Alinha à direita quando quebra linha */
+}
+
+.welcome-message {
+    font-size: 1.1em;
+    font-weight: 300;
+}
+
+.time-display {
+    font-size: 1em;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 5px 10px;
+    border-radius: var(--border-radius-sm);
+}
+
+.logout-btn {
+    background-color: var(--primary-dark);
+    color: white;
+    padding: 10px 15px;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logout-btn:hover {
+    background-color: #cc0000;
+    transform: translateY(-2px);
+}
+
+/* Main Content Area (Dashboard TI) */
+.dashboard-main {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.stats-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.content-and-sidebar {
+    display: flex;
+    gap: 30px;
+}
+
+.main-content {
+    flex: 3; /* Ocupa 3 partes do espaço disponível */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar {
+    flex: 1; /* Ocupa 1 parte do espaço disponível */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cards Genéricos (Base para todos os cards) */
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h2 {
+    font-size: 1.4em;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.card-header .fas {
+    font-size: 1.2em;
+    color: var(--primary-color);
+}
+
+.card-body {
+    flex-grow: 1; /* Permite que o corpo do card ocupe o espaço restante */
+}
+
+/* Estilos específicos para Stat Cards (Dashboard TI) */
+.stat-card-main {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-dark) 100%);
+    overflow: hidden;
+    position: relative;
+    padding: 25px 30px;
+}
+
+.stat-card-main .card-icon {
+    font-size: 3em;
+    color: var(--primary-color);
+    opacity: 0.7;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Ignora eventos de mouse */
+}
+
+.stat-card-main.total-chamados .card-icon { color: var(--primary-color); }
+.stat-card-main.prioridade-chamados .card-icon { color: var(--accent-red); } /* Cor para o ícone de prioridade */
+
+.stat-card-main .card-content {
+    flex-grow: 1;
+    z-index: 1; /* Garante que o conteúdo fique acima do ícone */
+}
+
+.stat-card-main h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-card-main h3 .fas {
+    color: var(--primary-color);
+}
+
+.stat-card-main .stat-value {
+    font-size: 2.8em;
+    font-weight: bold;
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+}
+
+.stat-card-main .stat-value-highlight {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--accent-red); /* Cor destacada para prioridade alta */
+    margin-bottom: 15px;
+    display: flex;
+    align-items: baseline;
+}
+
+.stat-card-main .stat-value-highlight .priority-label {
+    font-size: 0.6em;
+    font-weight: normal;
+    margin-right: 5px;
+    color: var(--text-light);
+}
+
+.stat-list {
+    font-size: 0.95em;
+    color: var(--text-light);
+}
+
+.stat-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-top: 1px dashed var(--border-color);
+}
+
+.stat-list li:first-child {
+    border-top: none;
+}
+
+.stat-list .value {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* Quick Actions Card (Dashboard TI) */
+.quick-actions-card .card-icon {
+    font-size: 3em;
+    color: var(--accent-green);
+    opacity: 0.7;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.quick-actions-card h3 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.quick-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: var(--border-radius-md);
+    background-color: var(--bg-dark);
+    color: var(--primary-color);
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+.quick-action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+}
+
+.quick-action-btn .fas {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.quick-action-btn.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.quick-action-btn.primary-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.quick-action-btn.secondary-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.quick-action-btn.secondary-btn:hover {
+    background-color: #5a6268;
+}
+
+.quick-action-btn.danger-btn {
+    background-color: var(--accent-red);
+    color: white;
+}
+
+.quick-action-btn.danger-btn:hover {
+    background-color: #c82333;
+}
+
+/* Table Styles (existing but refined) */
+.table-responsive {
+    overflow-x: auto; /* Garante que a tabela seja responsiva */
+}
+
+table {
+    min-width: 700px; /* Garante que a tabela não fique muito espremida */
+}
+
+.actions-cell {
+    white-space: nowrap; /* Impede que os botões quebrem linha */
+    text-align: center;
+}
+
+/* Botões (Geral) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 6px 10px;
+    font-size: 0.85em;
+}
+
+/* Badges de Prioridade e Status (Geral) */
+.priority-badge,
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: var(--border-radius-sm);
+    font-weight: bold;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+}
+
+.priority-badge.priority-alta { background-color: var(--accent-red); }
+.priority-badge.priority-média { background-color: var(--accent-orange); }
+.priority-badge.priority-baixa { background-color: var(--accent-green); }
+
+.status-badge.status-pendente { background-color: var(--accent-blue-light); }
+.status-badge.status-em_atendimento { background-color: var(--accent-orange); }
+.status-badge.status-resolvido { background-color: var(--accent-green); }
+/* Adicione outros status se houver, ex: .status-fechado { background-color: var(--secondary-color); } */
+
+/* Empty State (Geral) */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--bg-dark);
+    border-radius: var(--border-radius-md);
+    color: var(--text-light);
+    margin-top: 20px;
+}
+
+.empty-state .fas {
+    font-size: 3em;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.empty-state h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.empty-state p {
+    font-size: 1em;
+}
+
+/* Online Users Sidebar (Dashboard TI) */
+.online-users {
+    padding: 15px 0;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.user-item:last-child {
+    border-bottom: none;
+}
+
+.online-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-green);
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.user-name {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.user-status {
+    font-size: 0.85em;
+    color: var(--text-light);
+}
+
+/* Info Card (New, Dashboard TI) */
+.info-card {
+    background-color: #e6f7ff; /* Um azul mais suave para informações */
+    border: 1px solid #99e6ff;
+}
+
+.info-card .card-header h2,
+.info-card .card-header .fas {
+    color: #007bff; /* Azul do ícone */
+}
+
+
+/* --- Estilos Específicos para o Painel do Usuário (painel_usuario.php) --- */
+
+/* Container Principal do Usuário */
+.user-dashboard-container {
+    width: 100%;
+    max-width: 1200px; /* Um pouco menor que o dashboard de TI, para diferenciar um pouco */
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 4px 20px var(--shadow-light);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Botão "Abrir Novo Chamado" */
+.new-ticket-btn {
+    background-color: var(--accent-green);
+    color: white;
+    padding: 10px 15px;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.new-ticket-btn:hover {
+    background-color: #218838; /* Um pouco mais escuro que o green */
+    transform: translateY(-2px);
+}
+
+/* Main Content Area do Usuário */
+.user-main-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Cards de Estatísticas Rápidas do Usuário */
+.user-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* 4 colunas em telas maiores */
+    gap: 20px;
+}
+
+.user-stat-card {
+    display: flex;
+    flex-direction: column; /* Icone em cima, conteúdo embaixo */
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px;
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-dark) 100%);
+    box-shadow: 0 2px 8px var(--shadow-light);
+    border-radius: var(--border-radius-md);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.user-stat-card .card-icon {
+    font-size: 2.8em;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.user-stat-card h3 {
+    font-size: 1.1em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.user-stat-card .stat-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+/* Cores para os valores de status nas estatísticas do usuário */
+.user-stat-card .stat-value.pending-text { color: var(--accent-blue-light); }
+.user-stat-card .stat-value.in-progress-text { color: var(--accent-orange); }
+.user-stat-card .stat-value.resolved-text { color: var(--accent-green); }
+
+
+/* Seção de Lista de Chamados em Cards (Painel Usuário) */
+.section-header-cards {
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.section-header-cards h2 {
+    font-size: 1.6em;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-header-cards h2 .fas {
+    font-size: 1.1em;
+}
+
+.tickets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Colunas flexíveis para chamados */
+    gap: 25px;
+}
+
+.ticket-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 2px 10px var(--shadow-light);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    border-left: 5px solid; /* Borda colorida de acordo com o status */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.3s ease;
+}
+
+.ticket-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+/* Cores da borda do card baseadas no status do chamado */
+.ticket-card.status-pendente { border-left-color: var(--accent-blue-light); }
+.ticket-card.status-em_atendimento { border-left-color: var(--accent-orange); }
+.ticket-card.status-resolvido { border-left-color: var(--accent-green); }
+.ticket-card.status-fechado { border-left-color: var(--secondary-color); } /* Exemplo se houver status 'fechado' */
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.ticket-title {
+    font-size: 1.3em;
+    color: var(--primary-dark);
+    margin: 0;
+}
+
+.ticket-body {
+    flex-grow: 1; /* Permite que o corpo ocupe o espaço */
+    margin-bottom: 20px;
+}
+
+.ticket-description {
+    font-size: 0.95em;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    
+    /* Limita a altura da descrição para uniformizar cards com elipses */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Mostra no máximo 3 linhas */
+    -webkit-box-orient: vertical;
+    line-clamp: 3; /* Propriedade padrão (mais nova) */
+}
+
+.ticket-meta {
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+.ticket-meta li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.ticket-meta li .fas {
+    margin-right: 8px;
+    color: var(--secondary-color);
+}
+
+/* Botões de Ação no Card do Chamado */
+.ticket-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* Alinha botões à direita */
+    margin-top: auto; /* Empurra os botões para o final do card */
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+}
+
+/* Ajustes para botões menores nos cards de chamado */
+.ticket-actions .btn {
+    font-size: 0.85em;
+    padding: 8px 15px;
+}
+
+/* --- Responsividade (Geral e Específica) --- */
+
+@media (max-width: 1024px) {
+    /* Ajustes para o Dashboard TI */
+    .content-and-sidebar {
+        flex-direction: column;
+    }
+    .main-content,
+    .sidebar {
+        flex: auto; /* Ocupam largura total */
+    }
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .header-right {
+        justify-content: flex-start;
+        width: 100%; /* Ocupa a largura total para alinhar melhor */
+    }
+    /* Ajustes para o Painel do Usuário */
+    .tickets-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajusta colunas de chamados */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Geral para ambos os painéis */
+    body {
+        padding: 0; /* Remove padding lateral no corpo para telas muito pequenas */
+    }
+    .dashboard-container, .user-dashboard-container {
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0;
+    }
+    .header {
+        padding: 15px 20px;
+    }
+    .header h1 {
+        font-size: 1.5em;
+    }
+    .dashboard-main, .user-main-content {
+        padding: 20px;
+    }
+    .card {
+        padding: 20px;
+    }
+
+    /* Ajustes para Dashboard TI */
+    .stat-card-main {
+        padding: 20px 25px;
+        flex-direction: column; /* Em telas menores, a estatística e o ícone podem empilhar */
+        align-items: flex-start;
+    }
+    .stat-card-main .card-icon {
+        position: static; /* Volta para o fluxo normal */
+        transform: none;
+        margin-bottom: 15px;
+        font-size: 2.5em;
+    }
+    .stat-card-main .stat-value {
+        font-size: 2.2em;
+    }
+    .quick-actions-grid {
+        grid-template-columns: 1fr; /* Um botão por linha */
+    }
+    table {
+        font-size: 0.85em;
+    }
+    th, td {
+        padding: 10px;
+    }
+
+    /* Ajustes para Painel do Usuário */
+    .user-dashboard-container .header-right {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 10px;
+    }
+    .new-ticket-btn, .logout-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .user-stats-grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas pequenas para estatísticas do usuário */
+    }
+    .ticket-card {
+        padding: 20px;
+    }
+    .ticket-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .ticket-title {
+        font-size: 1.2em;
+    }
+    .ticket-actions {
+        flex-direction: column; /* Botões empilhados nos cards de chamado */
+    }
+    .ticket-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .welcome-message, .time-display, .logout-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    .logout-btn {
+        margin-top: 10px;
+    }
+    .dashboard-main, .user-main-content {
+        padding: 15px;
+    }
+    .stat-card-main .stat-value {
+        font-size: 2em;
+    }
+    .btn {
+        width: 100%; /* Botões de ação em tabela podem ser 100% */
+        margin-bottom: 5px;
+    }
+    .actions-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

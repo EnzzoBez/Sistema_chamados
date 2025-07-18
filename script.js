@@ -1,44 +1,41 @@
 // script.js
-
-document.addEventListener('DOMContentLoaded', () => {
-  const setorSelect = document.getElementById('setor');
-  const usuarioSelect = document.getElementById('usuario');
-
-  setorSelect.addEventListener('change', () => {
-    const setorId = setorSelect.value;
-    usuarioSelect.innerHTML = '<option>Carregando...</option>';
-    usuarioSelect.disabled = true;
-
-    if (!setorId) {
-      usuarioSelect.innerHTML = '<option>Selecione o setor primeiro</option>';
-      usuarioSelect.disabled = true;
-      return;
+document.addEventListener('DOMContentLoaded', function() {
+    // Função para atualizar a hora
+    function updateTime() {
+        const timeElement = document.getElementById('current-time');
+        if (timeElement) {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false // Formato 24h
+            };
+            // Define o idioma para Português do Brasil e o fuso horário
+            timeElement.textContent = now.toLocaleString('pt-BR', { ...options, timeZone: 'America/Sao_Paulo' });
+        }
     }
 
-    // Faz a requisição AJAX para buscar usuários do setor
-    fetch('buscar_usuarios.php?setor_id=' + setorId)
-      .then(response => response.json())
-      .then(data => {
-        usuarioSelect.disabled = false;
-        usuarioSelect.innerHTML = '';
+    // Atualiza a hora a cada segundo
+    updateTime();
+    setInterval(updateTime, 1000);
 
-        if (data.length === 0) {
-          usuarioSelect.innerHTML = '<option value="">Nenhum usuário encontrado</option>';
-          usuarioSelect.disabled = true;
-          return;
-        }
+    // Adicione aqui qualquer outra lógica JavaScript para interatividade
 
-        usuarioSelect.innerHTML = '<option value="">Selecione o usuário</option>';
-        data.forEach(user => {
-          const option = document.createElement('option');
-          option.value = user.id;
-          option.textContent = user.nome;
-          usuarioSelect.appendChild(option);
-        });
-      })
-      .catch(() => {
-        usuarioSelect.innerHTML = '<option value="">Erro ao carregar usuários</option>';
-        usuarioSelect.disabled = true;
-      });
-  });
+    // Exemplo: Animação ao passar o mouse em cards (apenas CSS já faz isso, mas JS seria para algo mais complexo)
+    // const cards = document.querySelectorAll('.card');
+    // cards.forEach(card => {
+    //     card.addEventListener('mouseenter', () => {
+    //         card.style.transform = 'translateY(-5px) scale(1.01)';
+    //         card.style.boxShadow = '0 8px 30px var(--shadow-medium)';
+    //     });
+    //     card.addEventListener('mouseleave', () => {
+    //         card.style.transform = 'translateY(0) scale(1)';
+    //         card.style.boxShadow = '0 4px 20px var(--shadow-light)';
+    //     });
+    // });
 });
